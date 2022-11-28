@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  elasticsearch:
+    image: 'docker.io/bitnami/elasticsearch:7-debian-10'
+    volumes:
+      - 'elasticsearch_data:/bitnami'
+    ports:
+      - '9200:9200'
+      
+  kibana:
+    image: 'docker.io/bitnami/kibana:7-debian-10'
+    ports:
+      - '5601:5601'
+    volumes:
+      - 'kibana_data:/bitnami'
+    depends_on:
+      - elasticsearch
+      
+volumes:
+  elasticsearch_data:
+    driver: local
+  kibana_data:
+    driver: local
